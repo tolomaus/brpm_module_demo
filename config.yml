@@ -1,0 +1,12 @@
+dependencies:
+  - brpm_module_brpm
+
+integration_servers:
+
+version: 0.1.0
+
+author: Niek Bartholomeus
+email: niek.bartholomeus@gmail.com
+homepage: https://github.com/BMC-RLM/brpm_module_demo
+summary: Demo customer's automation scripts and libraries to run on top of the BRPM Content framework
+description: Demo customer's automation scripts and libraries to run on top of the BRPM Content framework. See https://github.com/BMC-RLM/brpm_content for more information about the BRPM Content framework
