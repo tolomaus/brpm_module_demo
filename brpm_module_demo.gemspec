@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
+  spec.add_development_dependency "geminabox"
 
   spec.files         = `git ls-files`.split("\n")
   spec.require_path  = 'lib'
