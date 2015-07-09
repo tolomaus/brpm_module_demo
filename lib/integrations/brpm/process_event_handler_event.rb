@@ -102,7 +102,8 @@ def process_app_release_event(request)
     stage_name = request_with_details["plan_member"]["stage"]["name"]
     app_name = request_with_details["apps"][0]["name"]
     release_request_template_name = "#{release_request_template_prefix} #{app_name} - with promotion"
-    release_request_name = request_with_details["name"].sub("Deploy", "Release")
+    request_name = request_with_details["name"] || ""
+    release_request_name = request_name.sub("Deploy", "Release")
 
     if stage_name == deployment_request_stage_name
       BrpmAuto.log "Creating an app release request for plan '#{plan_name}' and app '#{app_name}' ..."
@@ -130,7 +131,7 @@ end
 
 def update_tickets_in_jira_by_request(request)
   params = get_default_params
-  params["request_id"] = request["id"][0]["content"]
+  params["request_id"] = (request["id"][0]["content"].to_i + 1000).to_s
 
   request_with_details = @brpm_rest_client.get_request_by_id(request["id"][0]["content"])
   if request_with_details.has_key?("plan_member")
