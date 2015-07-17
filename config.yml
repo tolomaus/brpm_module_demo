@@ -3,7 +3,7 @@ dependencies:
 
 integration_servers:
 
-version: 0.1.3
+version: 0.1.4
 
 author: Niek Bartholomeus
 email: niek.bartholomeus@gmail.com
