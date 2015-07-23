@@ -1,8 +1,6 @@
 dependencies:
   - brpm_module_brpm
 
-integration_servers:
-
 version: 0.1.4
 
 author: Niek Bartholomeus
