@@ -1,4 +1,4 @@
-BrpmAuto.require_module_from_gem "brpm_module_brpm"
+BrpmAuto.require_module "brpm_module_brpm"
 require_relative "../../jira_mappings"
 
 def process_event(event)
