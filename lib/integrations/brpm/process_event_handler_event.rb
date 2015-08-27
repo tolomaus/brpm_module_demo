@@ -140,7 +140,7 @@ def update_tickets_in_jira_by_request(request)
     BrpmAuto.log "Getting the target JIRA issue status for stage #{stage_name}..."
     params["target_issue_status"] = map_stage_to_issue_status(stage_name)
 
-    BrpmScriptExecutor.execute_automation_script("jira", "transition_issues_for_request", params)
+    BrpmScriptExecutor.execute_automation_script("brpm_module_jira", "transition_issues_for_request", params)
   end
 end
 
@@ -154,7 +154,7 @@ def update_tickets_in_jira_by_run(run)
   BrpmAuto.log "Getting the target JIRA issue status for stage #{stage["name"]}..."
   params["target_issue_status"] = map_stage_to_issue_status(stage["name"])
 
-  BrpmScriptExecutor.execute_automation_script("jira", "transition_issues_for_run", params)
+  BrpmScriptExecutor.execute_automation_script("brpm_module_jira", "transition_issues_for_run", params)
 end
 
 def create_release_in_jira(plan)
@@ -162,7 +162,7 @@ def create_release_in_jira(plan)
   params["jira_release_field_id"] = ENV["EVENT_HANDLER_JIRA_RELEASE_FIELD_ID"]
   params["release_name"] = plan["name"][0]
 
-  BrpmScriptExecutor.execute_automation_script("jira", "create_release", params)
+  BrpmScriptExecutor.execute_automation_script("brpm_module_jira", "create_release", params)
 end
 
 def update_release_in_jira(old_plan, new_plan)
@@ -171,7 +171,7 @@ def update_release_in_jira(old_plan, new_plan)
   params["old_release_name"] = old_plan["name"][0]
   params["new_release_name"] = new_plan["name"][0]
 
-  BrpmScriptExecutor.execute_automation_script("jira", "update_release", params)
+  BrpmScriptExecutor.execute_automation_script("brpm_module_jira", "update_release", params)
 end
 
 def delete_release_in_jira(plan)
@@ -179,6 +179,6 @@ def delete_release_in_jira(plan)
   params["jira_release_field_id"] = ENV["EVENT_HANDLER_JIRA_RELEASE_FIELD_ID"]
   params["release_name"] = plan["name"][0]
 
-  BrpmScriptExecutor.execute_automation_script("jira", "delete_release", params)
+  BrpmScriptExecutor.execute_automation_script("brpm_module_jira", "delete_release", params)
 end
 #################################
