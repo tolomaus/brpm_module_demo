@@ -2,7 +2,7 @@ dependencies:
   - brpm_module_brpm
   - brpm_module_jira
 
-version: 0.1.9
+version: 0.1.10
 
 author: Niek Bartholomeus
 email: niek.bartholomeus@gmail.com
