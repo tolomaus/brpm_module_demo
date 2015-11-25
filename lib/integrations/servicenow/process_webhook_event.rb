@@ -11,7 +11,7 @@ def process_event(event)
   request_params["target_path_or_servers"] = change_request["cmdb_ci"]
   request_params["change_request_number"] = change_request["number"]
 
-  @brpm_rest_client.create_request("[Template] Tieto Self Service - #{change_request["automation_type"]}", "Tieto Self Service - #{change_request["automation_type"]} - #{change_request["number"]}","Production", true, request_params)
+  @brpm_rest_client.create_request("[Template] Self Service - #{change_request["automation_type"]}", "Self Service - #{change_request["automation_type"]} - #{change_request["number"]}","Production", true, request_params)
 
   BrpmAuto.log "Finished processing the event."
 end

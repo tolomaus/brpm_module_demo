@@ -3,10 +3,15 @@
 This integration will automatically create a request in BRPM when a new change request is created in Service-Now. This is just a first step in integration Service-Now with BRPM. It can easily be extended to cover more complex integration needs. 
 
 ## Getting started
-### Running the webhook receiver as a daemon
+### Run the webhook receiver as a daemon
 This script should be used with a [webhook_receiver wrapper](https://github.com/BMC-RLM/brpm_content_framework/blob/master/infrastructure/scripts/run_webhook_receiver.sh). Set the environment variable ```WEBHOOK_RECEIVER_PROCESS_EVENT_SCRIPT``` to the location of this script and execute it in daemon mode: ```nohup ./run_webhook_receiver.sh &```
 
+### Create a request template in BRPM
+Create one or more request templates with the name "[Template] Self Service - <automation type>" where automation_type can be "Reboot server", etc.
+
 ### Configuring Service-Now
+_ Create a new dropdown field for a change request with the name u_choice_automation_type and configure a nmber of choices like "Reboot server" etc.
+
 - Create an outbound REST Message and set the endpoint to http://your-server:port/webhooks (only the POST HTTP method is needed so you may delete the others)
 
 - In the POST HTTP method, specify the content you want to send to the process_webhook_receiver.rb script in json format and create variables substitutions for each of the variables
@@ -39,6 +44,8 @@ function onAfter(current, previous) {
 	}	
 }
 ```
+
+Voila, we're all set. Now create a change request and see how it triggers a new request in BRPM!
 
 
 
