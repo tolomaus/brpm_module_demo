@@ -10,7 +10,7 @@ This script should be used with a [webhook_receiver wrapper](https://github.com/
 Create one or more request templates with the name ```[Template] Self Service - <automation type>``` where automation_type can be "Reboot server", etc.
 
 ### Configuring Service-Now
-_ Create a new dropdown field for a change request with the name u_choice_automation_type and configure a nmber of choices like "Reboot server" etc.
+- Create a new dropdown field for a change request with the name u_choice_automation_type and configure a nmber of choices like "Reboot server" etc.
 
 - Create an outbound REST Message and set the endpoint to http://your-server:port/webhooks (only the POST HTTP method is needed so you may delete the others)
 
