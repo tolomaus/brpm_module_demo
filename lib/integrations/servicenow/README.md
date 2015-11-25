@@ -7,7 +7,7 @@ This integration will automatically create a request in BRPM when a new change r
 This script should be used with a [webhook_receiver wrapper](https://github.com/BMC-RLM/brpm_content_framework/blob/master/infrastructure/scripts/run_webhook_receiver.sh). Set the environment variable ```WEBHOOK_RECEIVER_PROCESS_EVENT_SCRIPT``` to the location of this script and execute it in daemon mode: ```nohup ./run_webhook_receiver.sh &```
 
 ### Create a request template in BRPM
-Create one or more request templates with the name "[Template] Self Service - <automation type>" where automation_type can be "Reboot server", etc.
+Create one or more request templates with the name ```[Template] Self Service - <automation type>``` where automation_type can be "Reboot server", etc.
 
 ### Configuring Service-Now
 _ Create a new dropdown field for a change request with the name u_choice_automation_type and configure a nmber of choices like "Reboot server" etc.
