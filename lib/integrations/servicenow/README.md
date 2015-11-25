@@ -1,4 +1,5 @@
-# Getting started
+# Service-Now to BRPM integration
+## Getting started
 ### Running the webhook receiver as a daemon
 This script should be used with a [webhook_receiver wrapper](https://github.com/BMC-RLM/brpm_content_framework/blob/master/infrastructure/scripts/run_webhook_receiver.sh). Set the environment variable ```WEBHOOK_RECEIVER_PROCESS_EVENT_SCRIPT``` to the location of this script and execute it in daemon mode: ```nohup ./run_webhook_receiver.sh &```
 
