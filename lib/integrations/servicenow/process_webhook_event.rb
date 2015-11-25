@@ -8,8 +8,9 @@ def process_event(event)
   change_request = event["change_request"]
 
   request_params = {}
-  request_params["target_path_or_servers"] = change_request["cmdb_ci"]
+  request_params["change_request_id"] = change_request["id"]
   request_params["change_request_number"] = change_request["number"]
+  request_params["target_path_or_servers"] = change_request["cmdb_ci"]
 
   @brpm_rest_client.create_request("[Template] Self Service - #{change_request["automation_type"]}", "Self Service - #{change_request["automation_type"]} - #{change_request["number"]}","Production", true, request_params)
 
