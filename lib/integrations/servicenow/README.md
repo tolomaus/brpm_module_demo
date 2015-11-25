@@ -18,7 +18,7 @@ Create one or more request templates with the name ```[Template] Self Service - 
 
 You can use this content as an example:
 ```
-{"change_request": {"number":"${number}", "automation_type":"${automation_type}", "cmdb_ci":"${cmdb_ci}"}}
+{"change_request": {"id":"${id}", "number":"${number}", "automation_type":"${automation_type}", "cmdb_ci":"${cmdb_ci}"}}
 ```
 
 - Copy the generated javascript code from the "Preview Script Usage" link
@@ -32,9 +32,10 @@ As an example of a javascript piece of code:
 function onAfter(current, previous) {
 	try {
 		var r = new sn_ws.RESTMessageV2('BRPM', 'post');
+		r.setStringParameter('id', current.sys_id);
 		r.setStringParameter('number', current.number);
 		r.setStringParameter('automation_type', current.u_choice_automation_type);
-		r.setStringParameter('cmdb_ci', current.cmdb_ci);
+		r.setStringParameter('cmdb_ci', current.cmdb_ci.getDisplayValue());
 		var response = r.execute();
 		var responseBody = response.getBody();
 		var httpStatus = response.getStatusCode();
