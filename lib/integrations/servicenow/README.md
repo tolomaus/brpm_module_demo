@@ -1,16 +1,18 @@
-# Service-Now to BRPM integration
+# ServiceNow to BRPM integration
 ## Intro
-This integration will automatically create a request in BRPM when a new change request is created in Service-Now. This is just a first step in integration Service-Now with BRPM. It can easily be extended to cover more complex integration needs. 
+This integration will automatically create a request in BRPM when a change request is created in ServiceNow. This is just a first step in integrating ServiceNow with BRPM. It can easily be extended to cover more complex integration needs. Integrations from BRPM to ServiceNow can be found in the [ServiceNow module](https://github.com/BMC-RLM/brpm_module_servicenow). 
 
 ## Getting started
-### Running the webhook receiver as a daemon
-This script should be used with a [webhook_receiver wrapper](https://github.com/BMC-RLM/brpm_content_framework/blob/master/infrastructure/scripts/run_webhook_receiver.sh). Set the environment variable ```WEBHOOK_RECEIVER_PROCESS_EVENT_SCRIPT``` to the location of this script and execute it in daemon mode: ```nohup ./run_webhook_receiver.sh &```
+The integration is done with webhooks: we will set up a tiny HTTP server that listens on a certain mount point (in this case "webhooks") and have ServiceNow send its notifications as POSTs to this server. The process_webhook_events.rb script will then take action based on the contents of the notifications.  
+
+### Running the webhook receiver
+The process_webhook_event.rb script should be used with a [webhook_receiver wrapper](https://github.com/BMC-RLM/brpm_content_framework/blob/master/infrastructure/scripts/run_webhook_receiver.sh). Set the environment variable ```WEBHOOK_RECEIVER_PROCESS_EVENT_SCRIPT``` inside the wrapper to the location of this script and execute it in daemon mode: ```nohup ./run_webhook_receiver.sh &```
 
 ### Creating a request template in BRPM
 Create one or more request templates with the name ```[Template] Self Service - <automation type>``` where automation_type can be "Reboot server", etc.
 
-### Configuring Service-Now
-- Create a new dropdown field for a change request with the name u_choice_automation_type and configure a nmber of choices like "Reboot server" etc.
+### Configuring ServiceNow
+- Create a new dropdown field for a change request with the name u_choice_automation_type and configure a number of choices like "Reboot server" etc.
 
 - Create an outbound REST Message and set the endpoint to http://your-server:port/webhooks (only the POST HTTP method is needed so you may delete the others)
 
@@ -46,8 +48,8 @@ function onAfter(current, previous) {
 }
 ```
 
-### Creating a change request
-Voila, we're all set. Now create a change request in Service-Now and see how it triggers a request in BRPM!
+### Creating a change request in ServiceNow
+Voila, we're all set. Now create a change request in ServiceNow and see how it triggers a request in BRPM!
 
 
 
