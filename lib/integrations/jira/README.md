@@ -11,12 +11,12 @@ The ```process_webhook_event.rb``` script should be used with a [webhook_receive
 Execute the wrapper script in daemon mode: ```nohup /path/to/run_jira_webhook_receiver.sh &```
 
 ### Mapping the fields
-The mapping between an issue in JIRA and a ticket in BRPM can be configured in the [jira_mappings.rb](https://github.com/BMC-RLM/brpm_module_demo/blob/master/lib/jira_mappings.rb) script.
+The mapping between an issue in JIRA and a ticket in BRPM can be configured in the [jira_mappings.rb](https://github.com/BMC-RLM/brpm_module_demo/blob/master/lib/jira_mappings.rb) script. Make sure to restart the webhook receiver after each change to this script.
 
 ### Configuring the webhook in JIRA
 - First of all make sure that your projects in JIRA have exactly the same name as your applications in BRPM.
  
-- Create a WebHook (in System > Advanced > WebHooks) and set the url to http://your-server:port/webhooks (you can tweak the other fields to your specific needs as it's all quite self-explanatory, just make sure to "include the details" of the issues)
+- Create a WebHook (in System > Advanced > WebHooks) and set the url to http://your-server:port/webhooks. You can tweak the other fields to your specific needs as it's all quite self-explanatory, just make sure to "include the details" of the issues.
 
 ### Creating an issue in JIRA
 Voila, we're all set. Now create a change request in ServiceNow and see how it triggers a request in BRPM!
