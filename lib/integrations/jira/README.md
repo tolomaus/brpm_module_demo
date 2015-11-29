@@ -6,7 +6,7 @@ This integration will automatically synchronize JIRA issues with BRPM tickets wh
 The integration is done with webhooks: we will set up a tiny HTTP server that listens on a certain mount point (in this case "webhooks") and have JIRA send its notifications as POSTs to this server. The process_webhook_events.rb script will then take action based on the contents of the notifications.
 
 ### Running the webhook receiver
-The process_webhook_event.rb script should be used with a [webhook_receiver](https://github.com/BMC-RLM/brpm_content_framework/blob/master/bin/webhook_receiver). The easiest way to set this up is with a [wrapper script](https://github.com/BMC-RLM/brpm_module_demo/blob/master/lib/integrations/jira/run_jira_webhook_receiver.sh) that sets the necessary environment variables. Copy it to a location of your choice and adapt the environment variables where needed.
+The ```process_webhook_event.rb``` script should be used with a [webhook_receiver](https://github.com/BMC-RLM/brpm_content_framework/blob/master/bin/webhook_receiver). The easiest way to set this up is with a wrapper script like ```run_jira_webhook_receiver.sh``` that sets the necessary environment variables. Copy it to a location of your choice and adapt the environment variables where needed.
 
 Execute the wrapper script in daemon mode: ```nohup /path/to/run_jira_webhook_receiver.sh &```
 
