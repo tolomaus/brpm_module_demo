@@ -6,7 +6,9 @@ This integration will automatically create a request in BRPM when a change reque
 The integration is done with webhooks: we will set up a tiny HTTP server that listens on a certain mount point (in this case "webhooks") and have ServiceNow send its notifications as POSTs to this server. The process_webhook_events.rb script will then take action based on the contents of the notifications.  
 
 ### Running the webhook receiver
-The process_webhook_event.rb script should be used with a [webhook_receiver wrapper](https://github.com/BMC-RLM/brpm_content_framework/blob/master/infrastructure/scripts/run_webhook_receiver.sh). Set the environment variable ```WEBHOOK_RECEIVER_PROCESS_EVENT_SCRIPT``` inside the wrapper to the location of this script and execute it in daemon mode: ```nohup ./run_webhook_receiver.sh &```
+The ```process_webhook_event.rb``` script should be used with a [webhook_receiver](https://github.com/BMC-RLM/brpm_content_framework/blob/master/bin/webhook_receiver). The easiest way to set this up is with a wrapper script like ```run_servicenow_webhook_receiver.sh``` that sets the necessary environment variables. Copy it to a location of your choice and adapt the environment variables where needed.
+
+Execute the wrapper script in daemon mode: ```nohup /path/to/run_servicenow_webhook_receiver.sh &```
 
 ### Creating a request template in BRPM
 Create one or more request templates with the name ```[Template] Self Service - <automation type>``` where automation_type can be "Reboot server", etc.
