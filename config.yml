@@ -1,8 +1,9 @@
 dependencies:
   - brpm_module_brpm
   - brpm_module_jira
+  - brpm_module_servicenow
 
-version: 0.1.16
+version: 0.1.17
 
 author: Niek Bartholomeus
 email: niek.bartholomeus@gmail.com
