@@ -237,7 +237,7 @@ def add_link_to_ticket_in_servicenow(request)
   params = get_default_params_for_servicenow
   params["change_request_id"] = request_params["change_request_id"]
 
-  params["fields"] = { "u_url_brpm_request" => "#{params["brpm_url"]}/requests/#{request_with_details["id"]}" }
+  params["fields"] = { "u_url_brpm_request" => "#{params["brpm_url"]}/requests/#{request_with_details["id"].to_i + 1000}" }
 
   BrpmScriptExecutor.execute_automation_script("brpm_module_servicenow", "update_change_request", params)
 end
