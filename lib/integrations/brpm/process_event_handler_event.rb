@@ -32,7 +32,7 @@ def process_step_event(event)
       BrpmAuto.log "Step '#{step_new_state["name"][0]}' moved from state '#{step_old_state["aasm-state"][0]}' to state '#{step_new_state["aasm-state"][0]}'"
 
       if step_new_state["aasm-state"][0] == "complete" or step_new_state["aasm-state"][0] == "problem"
-        if step_new_state["property-values"][0].has_key?("add-logs-to-request-params") and step_new_state["property-values"][0]["add-logs-to-request-params"] == "true"
+        if step_new_state["property-values"][0].has_key?("add-logs-to-request-params") and step_new_state["property-values"][0]["add-logs-to-request-params"][0] == "true"
           add_logs_to_ticket_in_servicenow(step_new_state)
         end
       end
@@ -245,13 +245,15 @@ end
 def add_logs_to_ticket_in_servicenow(step)
   step_with_details = @brpm_rest_client.get_step_by_id(step["id"][0]["content"])
 
-  request_params = RequestParams.new_for_request("#{ENV["BRPM_HOME"]}/automation_results", step_with_details["installed_component"]["app"]["name"], step["request"]["id"].to_i + 1000)
+  request_params = RequestParams.new_for_request("#{ENV["BRPM_HOME"]}/automation_results", step_with_details["installed_component"]["app"]["name"], step_with_details["request"]["id"].to_i + 1000)
 
-  params = get_default_params_for_servicenow
-  params["change_request_id"] = request_params["change_request_id"]
+  if request_params["change_request_id"] and request_params["logs"]
+    params = get_default_params_for_servicenow
+    params["change_request_id"] = request_params["change_request_id"]
 
-  params["fields"] = { "u_string_brpm_log_note" => request_params["logs"].map { |k, v| "#{k}:\n#{v}"} }
+    params["fields"] = { "u_string_brpm_log_note" => request_params["logs"].map { |k, v| "#{k}:\n#{v}"} }
 
-  BrpmScriptExecutor.execute_automation_script("brpm_module_servicenow", "update_change_request", params)
+    BrpmScriptExecutor.execute_automation_script("brpm_module_servicenow", "update_change_request", params)
+  end
 end
 #################################
